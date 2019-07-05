@@ -30,9 +30,29 @@ def load_file(path):
     
 def compare_songs(lyrics, own_lyrics):
 
-    for x, y in zip(lyrics, own_lyrics):
-        print(x,y)
-        input()
+    #lyrics = "HiMyNameIsaFran"
+    #own_lyrics = "HiMyNameIsFran"
+
+    print(lyrics)
+    print(own_lyrics)
+
+    score = right = cont = index1 = index2 = 0
+    total_len = len(lyrics)
+    positions = []
+    most_fails={}
+
+    for n in range(total_len):
+        x = lyrics[0]
+        y = own_lyrics[0]
+        if x == y:
+            right += 1
+            lyrics = lyrics[1:]
+            own_lyrics = own_lyrics[1:]
+        else:
+            lyrics = lyrics[1:]
+        cont += 1
+    score = (right/total_len)*100
+    print("{0:.2f} % success!! Right characters: {1}, Total characters: {2}, Processed characters: {3}".format(score, right, total_len, cont))
 
 def main(artist_name, song_name, path):
     
@@ -40,7 +60,6 @@ def main(artist_name, song_name, path):
     lyrics = get_song_lyrics(artist_name, song_name)
     c_lyrics = clean_lyrics(lyrics)
     o_lyrics = clean_lyrics(own_lyrics)
-    print(o_lyrics)
     compare_songs(c_lyrics, o_lyrics)
 
 
