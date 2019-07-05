@@ -12,6 +12,8 @@ You need to install the following dependencies **(Requires Python3)**
 pip install lyricsgenius 
 ```
 
+From: https://github.com/johnwmillr/LyricsGenius
+
 ### Usage
 
 Just type down the lyrics of your favourite song by listening it and save it in a text file and run the program
