@@ -31,20 +31,21 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("-a", "--artist", required=True, help="Artist name")
     ap.add_argument("-s", "--song", required=True, help="Song name")
+    ap.add_argument("-f", "--file", required=True, help="Path to your solution file")
 
     args = vars(ap.parse_args())
 
     artist_name = args['artist']
     song_name = args['song']
 
-    token = read_file('token.txt')
+    token = load_file('token.txt')
     genius = lyricsgenius.Genius(token)
     #genius.verbose = False # Turn off status messages
 
     path = 'i_dont_care.txt'
     own_lyrics = load_file(path)
 
-    lyrics = get_song_lyrics("Ed Sheeran", "I Don't Care")
+    lyrics = get_song_lyrics(artist_name, song_name)
     c_lyrics = clean_lyrics(lyrics)
 
 
