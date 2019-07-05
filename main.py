@@ -14,6 +14,8 @@ def get_artists(artist_name, max_songs_number):
 def clean_lyrics(lyrics):
     line = re.sub(r"\[.*\]", "", lyrics)
     line = re.sub(r"\(.*\)","",line)
+    line = re.sub(r"\ ","",line)  
+    line = re.sub(r"\n","",line)  
     return line
 
 def load_file(path):
@@ -25,6 +27,22 @@ def load_file(path):
         print("Couldn't read file")
     finally:
         f.close()
+    
+def compare_songs(lyrics, own_lyrics):
+
+    for x, y in zip(lyrics, own_lyrics):
+        print(x,y)
+        input()
+
+def main(artist_name, song_name, path):
+    
+    own_lyrics = load_file(path)
+    lyrics = get_song_lyrics(artist_name, song_name)
+    c_lyrics = clean_lyrics(lyrics)
+    o_lyrics = clean_lyrics(own_lyrics)
+    print(o_lyrics)
+    compare_songs(c_lyrics, o_lyrics)
+
 
 if __name__ == "__main__":
 
@@ -37,16 +55,11 @@ if __name__ == "__main__":
 
     artist_name = args['artist']
     song_name = args['song']
+    path = args['file']
 
     token = load_file('token.txt')
     genius = lyricsgenius.Genius(token)
     #genius.verbose = False # Turn off status messages
 
-    path = 'i_dont_care.txt'
-    own_lyrics = load_file(path)
+    main(artist_name, song_name, path)
 
-    lyrics = get_song_lyrics(artist_name, song_name)
-    c_lyrics = clean_lyrics(lyrics)
-
-
-    #print(c_lyrics)
